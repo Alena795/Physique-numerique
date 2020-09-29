@@ -190,6 +190,7 @@ void ModifierNSteps(int valeur){
 	rename("temp.txt", Configuration);
 }
 
+//Sauvegarde le fichier de configuration
 void SauvegardeFichierInitial(string FichierInitial){
 	//Déclaration variables et ouverture des canaux
 	string ligne; 
@@ -211,6 +212,7 @@ void SauvegardeFichierInitial(string FichierInitial){
 	Copie.close();
 }
 
+//Réinitialise le fichier de configuration
 void ReinitialiserConfiguration(){
 	remove(Configuration);
 	rename("Copie_configuration.txt", Configuration);
@@ -232,7 +234,7 @@ double DerniereValeurColonne(int NombreColonne){
 	return donnee;
 }
 
-
+//Exécution du programme
 int main(){	
 	//On calcule le nombre de colonne dans le fichier d'Output
 	size_t NombreColonne(NombreColonneOutput());
