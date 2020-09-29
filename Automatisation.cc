@@ -199,17 +199,26 @@ void SauvegardeFichierInitial(string FichierInitial){
 	if (ALire.is_open() != true){
 		throw(1);
 	}
-	ofstream Copie;
-	Copie.open("Copie_configuration.txt");
 	
-	//Création d'une copie du fichier de configuration
-	while (getline(ALire, ligne)){
-		Copie << ligne << endl;
+	//Regarde si la copie existe déjà
+	ifstream Check;
+	Check.open("Copie_configuration.txt");
+	
+	//Si la copie n'existe pas, on la fait. Si elle existe, on ne fait rien.
+	if (Check.fail()){
+		//Création d'une copie du fichier de configuration
+		ofstream Copie;
+		Copie.open("Copie_configuration.txt");
+		while (getline(ALire, ligne)){
+			Copie << ligne << endl;
+		}
+		//On ferme le canal de copie
+		Copie.close();
 	}
 	
 	//On ferme les canaux
 	ALire.close();
-	Copie.close();
+	Check.close();
 }
 
 //Réinitialise le fichier de configuration
