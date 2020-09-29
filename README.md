@@ -6,7 +6,8 @@ Le programme fonctionne sous Linux. Une seule règle: si vous trouvez ce fichier
 Le but du programme est de simplifier la gestion de tâches pouvant être automatisées. Il est notamment utile dans l'étude de convergence puisqu'il permet de faire plusieurs simulations à la fois et d'enregistrer les nsteps ainsi qu'une donnée choisie par l'utilisateur dans le fichier nouvellement généré: "ValeursMatLab.txt" .
 
 <h2>Avant de commencer</h2>
-<p>Les premiers réglages sont assez simples. Il faut commencer par modifier des informations au début du fichier entre les balises : "// //!\\ IMPORTANT: A MODIFIER" 
+<p>Les premiers réglages sont assez simples. Il faut commencer par modifier des informations au début du fichier entre les balises : "// //!\\ IMPORTANT: A MODIFIER".
+  
 L'utilisateur doit commencer par spécifier son fichier de configuration, l'exécutable de son exercice, son fichier d'output, ainsi que la colonne du fichier d'output qu'il veut utiliser pour l'analyse de convergence dans MatLAB (Attention, on se réfère à la première colonne avec l'indice 1 (et non 0)).</p>
 
 <h2>Fonctionnement</h2>
