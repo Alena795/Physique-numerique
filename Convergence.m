@@ -2,7 +2,7 @@
 filename = 'ValeursMatLab.txt';
 data = load(filename);
 
-%Défini les variables associées aux valeurs dans MatLab
+%Définit les variables associées aux valeurs dans MatLab
 nsteps_num = data(:,1); 
 xfin_num = data(:,1);
 
