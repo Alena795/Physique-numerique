@@ -14,6 +14,7 @@ using namespace std;
 
 
 
+
 // //!\\ IMPORTANT: A MODIFIER
 
 const char* Configuration("configuration.in"); //Fichier de configuration
@@ -73,61 +74,7 @@ string LireJusquaEspace(string const& LigneASeparer){
 }
 
 //Retourne la string prise en paramètre en supprimant tout élément avant le premier espace de la string.
-string LireDepuisEspace(string const& LigneASeparer){%Charge les valeurs dans MatLab
-filename = 'ValeursMatLab.txt';
-data = load(filename);
-
-%Défini les variables associées aux valeurs dans MatLab
-nsteps_num = data(:,1); 
-xfin_num = data(:,1);
-
-%Génération du graphe
-lw=2; fs=16;
-figure
-plot(1./nsteps_num, xfin_num, 'k+-','linewidth',lw)
-set(gca,'fontsize',fs)
-xlabel('1/N_{steps}')
-ylabel('x_{final}')
-grid on
-
-% si on a la solution analytique:
-% xfin_ana = ...; % à compléter
-% error_xfin = xfin_num-xfin_ana;
-% figure
-% plot(nsteps_num, abs(error_xfin),'k+-')
-% set(gca,'fontsize',fs)
-% set(gca,'xscale','log')%Charge les valeurs dans MatLab
-filename = 'ValeursMatLab.txt';
-data = load(filename);
-
-%Défini les variables associées aux valeurs dans MatLab
-nsteps_num = data(:,1); 
-xfin_num = data(:,1);
-
-%Génération du graphe
-lw=2; fs=16;
-figure
-plot(1./nsteps_num, xfin_num, 'k+-','linewidth',lw)
-set(gca,'fontsize',fs)
-xlabel('1/N_{steps}')
-ylabel('x_{final}')
-grid on
-
-% si on a la solution analytique:
-% xfin_ana = ...; % à compléter
-% error_xfin = xfin_num-xfin_ana;
-% figure
-% plot(nsteps_num, abs(error_xfin),'k+-')
-% set(gca,'fontsize',fs)
-% set(gca,'xscale','log')
-% set(gca,'yscale','log')
-% xlabel('N_{steps}')
-% ylabel('Error on x_{fin}')
-% grid on
-% set(gca,'yscale','log')
-% xlabel('N_{steps}')
-% ylabel('Error on x_{fin}')
-% grid on
+string LireDepuisEspace(string const& LigneASeparer){
 	size_t i = 0;
 	for (; i < LigneASeparer.length(); i++){ 
 		if (isblank(LigneASeparer[i])){ 
