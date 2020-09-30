@@ -1,6 +1,6 @@
 # Fichier d'automatisation pour la physique numérique (BA 3 physique EPFL)
 
-Le programme fonctionne sous Linux. Une seule règle: si vous trouvez ce fichier, vous pouvez l'utiliser. Je vous demanderai simplement de ne pas le diffuser en masse. Merci.
+Le programme fonctionne sous Linux. Une seule règle: si vous trouvez ce fichier, vous pouvez l'utiliser. Je vous demanderai simplement de ne pas le diffuser en masse. Merci. Le fichier "Convergence.m" permet de dessiner le graphe dans MatLAB du fichier de sortie généré par le programme en C++.
 
 <h2>Objectif du programme</h2>
 Le but du programme est de simplifier la gestion de tâches pouvant être automatisées. Il est notamment utile dans l'étude de convergence puisqu'il permet de faire plusieurs simulations à la fois et d'enregistrer les nsteps ainsi qu'une donnée choisie par l'utilisateur dans le fichier nouvellement généré: "ValeursMatLab.txt" .
