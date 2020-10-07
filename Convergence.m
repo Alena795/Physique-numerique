@@ -3,16 +3,20 @@ filename = 'ValeursMatLab.txt';
 data = load(filename);
 
 %Défini les variables associées aux valeurs dans MatLab
-nsteps_num = data(:,1); 
+dt_num = data(:,1); 
 xfin_num = data(:,2);
+
+%Exercice 1.3b)
+%x = 0.778363*10^-6;
+%xdiff = abs(xfin_num - x);
 
 %Génération du graphe
 lw=2; fs=16;
 figure
-plot(1./nsteps_num, xfin_num, 'k+-','linewidth',lw)
+plot(dt_num, xfin_num, 'k+-','linewidth',lw)
 set(gca,'fontsize',fs)
-xlabel('1/N_{steps}')
-ylabel('x_{final} [m]')
+xlabel('dt [s]')
+ylabel('v_{final} [m/s]')
 grid on
 
 % si on a la solution analytique:
