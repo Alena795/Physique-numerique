@@ -1,50 +1,32 @@
-% Nom du fichier d'output a analyser (modifiez selon vos besoins)
-filename = 'output.out'; 
-
-% Chargement des donnees
+%Charge les valeurs dans MatLab
+filename = 'ValeursMatLab.txt';
 data = load(filename);
 
-% Extraction des quantites d'interet
-Pf = data(:,4);
-Emec = data(:,5);
+%Défini les variables associées aux valeurs dans MatLab
+dt_num = data(:,1); 
+xfin_num = data(:,2);
 
-%Variables utiles
-nsteps = 2e3;
-tfin = 1.5e-12;
-dt = tfin/nsteps; 
-
-%Calcul de la matrice contenant les éléments de temps
-t = 0;
-ListeTemps = [];
-while t < tfin - dt 
-    ListeTemps = [ListeTemps; t];
-    t = t + dt;
-end
-
-%Calcul de la pente de Emec par rapport à t
-PenteEmec = [];
-for c = 1:(size(Emec)-1)
-    PenteEmec = [PenteEmec; (Emec(c+1)-Emec(c))/dt];
-end
-
-%Suppression du dernier élément de pf pour pouvoir le plot
-Pf(end) = [];
-
-% Test taille arrays
-%size(PenteEmec)
-%size(ListeTemps)
-%size(Pf)
+%Exercice 1.3b)
+%x = 0.778363*10^-6;
+%xdiff = abs(xfin_num - x);
 
 %Génération du graphe
 lw=2; fs=16;
 figure
-plot(ListeTemps, PenteEmec, 'k+-','linewidth',lw)
-hold on
-plot(ListeTemps, Pf, 'r*-','linewidth',lw)
-hold off
+plot(dt_num, xfin_num, 'k+-','linewidth',lw)
 set(gca,'fontsize',fs)
-xlabel('Temps [s]')
-ylabel('Puissance [W]')
-legend('dEmec/dt','Pf')
+xlabel('dt [s]')
+ylabel('v_{final} [m/s]')
 grid on
 
+% si on a la solution analytique:
+% xfin_ana = ...; % à compléter
+% error_xfin = xfin_num-xfin_ana;
+% figure
+% plot(nsteps_num, abs(error_xfin),'k+-')
+% set(gca,'fontsize',fs)
+% set(gca,'xscale','log')
+% set(gca,'yscale','log')
+% xlabel('N_{steps}')
+% ylabel('Error on x_{fin}')
+% grid on
