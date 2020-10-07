@@ -15,14 +15,15 @@ using namespace std;
 
 
 
+
 // //!\\ IMPORTANT: A MODIFIER
 
 const char* Configuration("configuration.in"); //Fichier de configuration
 const char* Executable("./Exercice1_2020_PierreAncey"); //Insérer commande servant à exécuter l'exercice de physique numérique dans le terminal
 string Output("output.out"); //Insérer nom du fichier d'output de l'exercice
-size_t PosColonne(2); //Insérer la colonne de l'élément (colonne dans l'output) que l'on va utiliser dans MatLab
+size_t PosColonne(3); //Insérer la colonne de l'élément (colonne dans l'output) que l'on va utiliser dans MatLab
 /* Exemple:
-   Soit output.ou de la forme:
+   Soit output.out de la forme:
    0 0 0
    0 a 0
    La colonne qui contient la valeur a est la colonne numéro 2. Si l'on veut voir comment évolue x en fonction de nsteps 
@@ -104,6 +105,63 @@ string LireChiffres(string const& LigneASeparer){
 		++i;
 	}
 	return Temp;
+}
+
+//Retourne la valeur de tfin
+double Valeur_tfin(){
+	//Déclaration variables et ouverture du canal
+	string ligne; 
+	ifstream ALire;
+	ALire.open(Configuration);
+	if (ALire.is_open() != true){
+		throw(1);
+	}
+	
+	//Création d'un fichier temporaire auquel on ajoute les informations que l'on souhaite
+	while (getline(ALire, ligne)){
+		// La ligne contient la variable recherchée
+		if (ligne.find("tfin") != ligne.npos){		
+			//Variables utiles lors des calculs
+			bool negatif(false);			
+			string Chiffres(LireChiffres(ligne));
+			string temp;
+			size_t i(0);
+			
+			//Calcul du coefficient devant la puissance de 10
+			while (Chiffres[i] != 'e'){
+				temp.push_back(Chiffres[i]);
+				++i;
+			}
+			double coeff(stoi(temp));
+			//Reinitialisation variables de calcul
+			if (Chiffres[i+1] == '-'){
+				negatif = true;
+				++i;
+			}
+			Chiffres = Chiffres.substr(i+1, Chiffres.length() - i-1);
+			i = 0;
+			temp.clear();
+			//Calcul de l'exposant			
+			while (Chiffres[i] != ' '){
+				temp.push_back(Chiffres[i]);
+				++i;
+			}
+			double exposant(stoi(temp));
+			if (negatif == true){
+				exposant *= -1;
+			}
+			//On ferme le canal
+			ALire.close();
+			//Retour de la valeur finale
+			return coeff*pow(10, exposant);
+		}
+	}
+	
+	//On ferme le canal
+	ALire.close();
+	
+	//Echec (tfin pas trouvé)
+	return -1;
 }
 
 //Modifie toute les valeurs du fichier de configuration à l'exception de nsteps
@@ -264,6 +322,9 @@ int main(){
 	On aura respectivement comme nbr_steps pour les simulations: 1'000, 2'000, 4'000, 8'000, 16'000
 	*/
 	
+	//On calcule tfin qu'une fois
+	double tfin(Valeur_tfin());
+	
 	//Présentation
 	cout << "======================================================" << endl 
 	     << "Programme d'automatisation par Pierro le meilleur bro'" << endl 
@@ -319,15 +380,15 @@ int main(){
 		     << "=============" << endl << endl;
 		ModifierNSteps(nbr_nsteps*(pow(coeff, i)));
 		std::system(Executable); //Sous Linux (marche pour les machines virtuelles)
-		ValeursMatLab << nbr_nsteps*(pow(coeff, i)) << " " << DerniereValeurColonne(NombreColonne) << endl;		
+		ValeursMatLab << tfin / (double(nbr_nsteps*(pow(coeff, i)))) << " " << DerniereValeurColonne(NombreColonne) << endl;		
 		cout << endl;
 	}
 	
-	//On affiche le message finaé
+	//On affiche le message final
 	cout << "=====================" << endl 
 		 << "*Fin des simulations*" << endl 
 		 << "=====================";
-	//Le fichier contient les nsteps dans la première colonne et la valeur choisie dans la deuxième
+	//Le fichier contient les dt dans la première colonne et la valeur choisie dans la deuxième
 	
 	//On ferme le dernier ostream
 	ValeursMatLab.close();
